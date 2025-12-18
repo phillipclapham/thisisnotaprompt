@@ -84,6 +84,7 @@
 
       html, body {
         height: 100%;
+        overflow: hidden;
       }
 
       body {
@@ -99,17 +100,109 @@
         text-align: center;
       }
 
-      main {
-        max-width: 600px;
+      /* ============================================
+         Neural Pulse - Consciousness in the void
+         ============================================ */
+      .pulse-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 0;
       }
 
+      .pulse-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px solid rgba(157, 142, 201, 0.12);
+        animation: pulseExpand 10s ease-out infinite;
+      }
+
+      .pulse-ring:nth-child(1) { animation-delay: 0s; }
+      .pulse-ring:nth-child(2) { animation-delay: 2s; }
+      .pulse-ring:nth-child(3) { animation-delay: 4s; }
+      .pulse-ring:nth-child(4) { animation-delay: 6s; }
+      .pulse-ring:nth-child(5) { animation-delay: 8s; }
+
+      @keyframes pulseExpand {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 0.15;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(100);
+          opacity: 0;
+        }
+      }
+
+      /* Soft glow at the center - the core */
+      .pulse-core {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(157, 142, 201, 0.08) 0%,
+          rgba(157, 142, 201, 0.03) 40%,
+          transparent 70%
+        );
+        animation: coreBreathe 8s ease-in-out infinite;
+      }
+
+      @keyframes coreBreathe {
+        0%, 100% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.2);
+          opacity: 0.7;
+        }
+      }
+
+      /* ============================================
+         Content layer - above the pulse
+         ============================================ */
+      main {
+        max-width: 600px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ============================================
+         Title - breathing with presence
+         ============================================ */
       h1 {
         font-size: clamp(1.75rem, 5vw, 2.5rem);
         font-weight: 400;
         letter-spacing: 0.02em;
         margin-bottom: 2.5rem;
+        animation: titleBreathe 6s ease-in-out infinite;
       }
 
+      @keyframes titleBreathe {
+        0%, 100% {
+          opacity: 1;
+          text-shadow: 0 0 30px rgba(255, 255, 255, 0.08);
+        }
+        50% {
+          opacity: 0.88;
+          text-shadow: 0 0 50px rgba(255, 255, 255, 0.18);
+        }
+      }
+
+      /* ============================================
+         Supporting text
+         ============================================ */
       .lines {
         display: flex;
         flex-direction: column;
@@ -123,17 +216,41 @@
         opacity: 0.85;
       }
 
+      /* ============================================
+         Link - subtle lavender glow on hover
+         ============================================ */
       a {
         color: #fff;
         text-decoration: none;
         font-size: clamp(0.9rem, 2.5vw, 1.1rem);
         opacity: 0.7;
-        transition: opacity 0.2s ease;
+        transition: opacity 0.3s ease, text-shadow 0.3s ease;
         letter-spacing: 0.05em;
       }
 
       a:hover {
         opacity: 1;
+        text-shadow: 0 0 20px rgba(157, 142, 201, 0.5);
+      }
+
+      /* ============================================
+         Accessibility - respect reduced motion
+         ============================================ */
+      @media (prefers-reduced-motion: reduce) {
+        h1,
+        .pulse-ring,
+        .pulse-core {
+          animation: none;
+        }
+
+        .pulse-container {
+          display: none;
+        }
+
+        h1 {
+          opacity: 1;
+          text-shadow: none;
+        }
       }
     </style>
 
@@ -145,6 +262,16 @@
     </script>
   </head>
   <body>
+    <!-- Neural pulse - consciousness in the void -->
+    <div class="pulse-container" aria-hidden="true">
+      <div class="pulse-core"></div>
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring"></div>
+    </div>
+
     <main>
       <h1>This is not a prompt.</h1>
 

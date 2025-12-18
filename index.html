@@ -136,6 +136,12 @@
         opacity: 1;
       }
     </style>
+
+    <!-- Plausible Analytics -->
+    <script async src="https://plausible.io/js/pa-MaTWUrJxtl-WacuZCXWf6.js"></script>
+    <script>
+      window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) };
+    </script>
   </head>
   <body>
     <main>
@@ -147,7 +153,14 @@
         <span>This is partnership.</span>
       </p>
 
-      <a href="https://protocolmemory.com">&rarr; Protocol Memory</a>
+      <a href="https://protocolmemory.com" id="pm-link">&rarr; Protocol Memory</a>
     </main>
+
+    <!-- Track PM clicks -->
+    <script>
+      document.getElementById('pm-link').addEventListener('click', function() {
+        plausible('PM Click');
+      });
+    </script>
   </body>
 </html>
